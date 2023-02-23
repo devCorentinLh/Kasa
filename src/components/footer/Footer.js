@@ -7,7 +7,7 @@ export default function Footer() {
 			<a href='/Kasa/'>
 			<img src={logo} alt="Kasa - agence de location d'appartements entre particuliers" />
 			</a>
-			<p className='footer_copyright'>© 2020 Kasa. All rights reserved. Codé par Corentin Lh.</p>
+			<p className='footer_copyright'>© 2020 Kasa. All rights reserved.</p>
 		</footer>
 	)
 }
