@@ -22,7 +22,7 @@ useEffect(() => {
           const data = datas.find((data) => data.id  === id);
           setData(data);
           setImageSlider(data.pictures);
-      if (data === undefined) navigate('/NotFound');
+      if (!data) navigate('/NotFound');
       }).catch(() => navigate("/NotFound"));
 },[id, navigate]);
 
