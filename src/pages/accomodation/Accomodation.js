@@ -1,7 +1,5 @@
-import './accomodation.scss';
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import datas from '../../data/data';
 import Header from '../../components/header/Header';
 import Slider from '../../components/carousel/Carousel';
 import Footer from '../../components/footer/Footer';
@@ -10,25 +8,35 @@ import greyStar from '../../assets/grey_star.png';
 import redStar from '../../assets/red_star.png';
 
 export default function Accomodation() {
+  const [data, setData] = useState({});
   const [imageSlider, setImageSlider] = useState([]);
 
   const { id: idAccomodation } = useParams();
-  const dataCurrentAccomodation = datas.find((data) => data.id === idAccomodation);
-
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!dataCurrentAccomodation) {
-      navigate('/NotFound');
-    } else {
-      setImageSlider(dataCurrentAccomodation.pictures);
+    async function fetchData() {
+      try {
+        const response = await fetch('../public/data/data.json');
+        const jsonData = await response.json();
+        const currentAccomodation = jsonData.find((data) => data.id === idAccomodation);
+        if (!currentAccomodation) {
+          navigate('/NotFound');
+        } else {
+          setData(currentAccomodation);
+          setImageSlider(currentAccomodation.pictures);
+        }
+      } catch (error) {
+        console.error(error);
+      }
     }
-  }, [dataCurrentAccomodation, idAccomodation, navigate]);
+    fetchData();
+  }, [idAccomodation, navigate]);
 
-  const name = dataCurrentAccomodation?.host?.name.split(' ');
-  const rating = dataCurrentAccomodation?.rating;
-  const description = dataCurrentAccomodation?.description;
-  const equipments = dataCurrentAccomodation?.equipments;
+  const name = data?.host?.name?.split(' ');
+  const rating = data?.rating;
+  const description = data?.description;
+  const equipments = data?.equipments;
 
   return (
     <>
@@ -37,10 +45,10 @@ export default function Accomodation() {
       <main className="accomodation">
         <div className="accomodation_content">
           <div className="accomodation_content_infos">
-            <h1>{dataCurrentAccomodation?.title}</h1>
-            <p>{dataCurrentAccomodation?.location}</p>
+            <h1>{data?.title}</h1>
+            <p>{data?.location}</p>
             <div>
-              {dataCurrentAccomodation?.tags?.map((tag, index) => (
+              {data?.tags?.map((tag, index) => (
                 <button key={index}>{tag}</button>
               ))}
             </div>
@@ -52,7 +60,7 @@ export default function Accomodation() {
                   <span>{name[0]}</span>
                   <span>{name[1]}</span>
                 </div>
-                <img src={dataCurrentAccomodation.host.picture} alt="host of this accomodation" />
+                <img src={data.host?.picture} alt="host of this accomodation" />
               </div>
             )}
 
