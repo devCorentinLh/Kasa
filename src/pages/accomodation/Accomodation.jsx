@@ -1,3 +1,4 @@
+import './accomodation.scss'
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../../components/header/Header';
@@ -9,40 +10,27 @@ import redStar from '../../assets/red_star.png';
 
 export default function Accomodation() {
   const [data, setData] = useState({});
-  const [imageSlider, setImageSlider] = useState({});
+  const [imageSlider, setImageSlider] = useState([]);
 
   const {id} = useParams();
   const navigate = useNavigate();
 
-  //useEffect(() => {
-   // fetch('/data.json')
-    //    .then((response) => response.json())
-    //   .then((currentAccomodation) => setData(currentAccomodation))
-       //.catch(() =>    navigate("/NotFound"));
-    //}, [navigate]);
-
-
 useEffect(() => {
- fetch('/public/logements.json')
+ fetch('../logements.json')
      .then((response) => response.json())
       .then((datas) => {
           const data = datas.find((data) => data.id  === id);
           setData(data);
+          setImageSlider(data.pictures);
       if (data === undefined) navigate('/NotFound');
-          else {
-            setData(data);
-            setImageSlider(data.pictures);}
       }).catch(() => navigate("/NotFound"));
 },[id, navigate]);
-console.log(data)
-
-//const currentAccomodation = jsonData.find((data) => data.id === idAccomodation);
 
   const name = data?.host?.name?.split(' ');
   const rating = data?.rating;
   const description = data?.description;
   const equipments = data?.equipments;
-  console.log(data)
+
   return (
     <>
       <Header />
