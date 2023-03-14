@@ -7,12 +7,6 @@ import { useEffect } from 'react';
 
 
 export default function Home() {
-useEffect(() => {
-    fetch('../logements.json')
-    .then((response) => response.json())
-    .catch((error) =>console.error(error));
-   },);
-
 	return (
 		<div className='home'>
 			<Header />
