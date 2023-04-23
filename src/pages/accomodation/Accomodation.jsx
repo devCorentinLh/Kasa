@@ -16,14 +16,15 @@ export default function Accomodation() {
   const navigate = useNavigate();
 
 useEffect(() => {
- fetch('/src/logements.json"')
+ fetch('/Kasa/logements.json')
      .then((response) => response.json())
       .then((datas) => {
           const data = datas.find((data) => data.id  === id);
           setData(data);
           setImageSlider(data.pictures);
-      if (!data) navigate('/NotFound');
-      }).catch(() => navigate("/NotFound"));
+      }).catch((e) => {
+        navigate("/NotFound")
+      });
 },[id, navigate]);
 
   const name = data?.host?.name?.split(' ');
