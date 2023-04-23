@@ -1,22 +1,12 @@
 import './gallery.scss'
+import datas from '../../data/data'
 import Card from '../card/Card'
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 export default function Gallery() {
 
-    const [accommodations, setAccommodations] = useState([])
-    const navigate = useNavigate()
-
-useEffect(() => {
-    fetch('../../../src/logements.json')
-    .then((response) => response.json())
-    .then((data) => {setAccommodations(data);
-         }).catch((error) =>console.error(error));
-   },[navigate]);
     return (
         <main className='home_gallery'>
-            {accommodations && accommodations.map(data => {
+            {datas.map(data => {
                 return (
                     <Card
                         key={data.id}

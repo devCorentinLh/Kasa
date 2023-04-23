@@ -9,7 +9,7 @@ export default function Home() {
 		<div className='home'>
 			<Header />
 			<Banner />
-			<Gallery/>
+			<Gallery />
 			<Footer />
 		</div>
 	)
