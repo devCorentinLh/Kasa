@@ -6,7 +6,7 @@ export default function Header() {
 	return (
 		<header className='header'>
 			<h1>
-			<a href='/'>
+			<a href='/Index.html'>
 				<img src={Logo} alt="kasa, location d'appartements" />
 				</a>
 			</h1>
