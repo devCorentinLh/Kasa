@@ -9,7 +9,7 @@ export default function Gallery() {
     const navigate = useNavigate()
 
 useEffect(() => {
-    fetch('../logements.json')
+    fetch('../../../src/logements.json')
     .then((response) => response.json())
     .then((data) => {setAccommodations(data);
          }).catch((error) =>console.error(error));

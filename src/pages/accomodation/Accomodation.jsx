@@ -16,7 +16,7 @@ export default function Accomodation() {
   const navigate = useNavigate();
 
 useEffect(() => {
- fetch('../logements.json')
+ fetch('/src/logements.json"')
      .then((response) => response.json())
       .then((datas) => {
           const data = datas.find((data) => data.id  === id);
